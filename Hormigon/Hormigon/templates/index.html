@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes de Hormigón</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: inline-block;
+            width: 150px;
+        }
+        input[type="text"], input[type="number"] {
+            width: 300px;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        input[type="submit"], .eliminar {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+        }
+        input[type="submit"]:hover, .eliminar:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Listado de Clientes de Hormigón</h1>
+
+<!-- Formulario para agregar un nuevo cliente -->
+<form action="/agregar_cliente" method="post">
+    <label for="nombre">Nombre:</label>
+    <input type="text" id="nombre" name="nombre" required><br>
+    
+    <label for="apellido">Apellido:</label>
+    <input type="text" id="apellido" name="apellido" required><br>
+    
+    <label for="telefono">Teléfono:</label>
+    <input type="text" id="telefono" name="telefono" required><br>
+    
+    <label for="direccion">Dirección de obra:</label>
+    <input type="text" id="direccion" name="direccion" required><br>
+    
+    <label for="localidad">Localidad:</label>
+    <input type="text" id="localidad" name="localidad" required><br>
+    
+    <label for="km_planta">Kilómetros de la planta a la obra:</label>
+    <input type="number" id="km_planta" name="km_planta" required><br>
+    
+    <input type="submit" value="Agregar Cliente">
+</form>
+
+<!-- Tabla para mostrar los clientes -->
+<table>
+    <tr>
+        <th>Nombre</th>
+        <th>Apellido</th>
+        <th>Teléfono</th>
+        <th>Dirección de obra</th>
+        <th>Localidad</th>
+        <th>Kilómetros de la planta a la obra</th>
+        <th>Acción</th>
+    </tr>
+    {% for cliente in clientes %}
+    <tr>
+        <td>{{ cliente[0] }}</td>
+        <td>{{ cliente[1] }}</td>
+        <td>{{ cliente[2] }}</td>
+        <td>{{ cliente[3] }}</td>
+        <td>{{ cliente[4] }}</td>
+        <td>{{ cliente[5] }}</td>
+        <td><a class="eliminar" href="/eliminar_cliente/{{ loop.index }}">Eliminar</a></td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>
